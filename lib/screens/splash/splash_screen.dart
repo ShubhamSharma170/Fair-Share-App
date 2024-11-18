@@ -17,6 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: splashbackgroundColor,
         body: Stack(children: [
           Positioned.fill(
