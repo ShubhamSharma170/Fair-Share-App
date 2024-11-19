@@ -1,5 +1,7 @@
+import 'package:fair_share/screens/home/home_screen.dart';
 import 'package:fair_share/screens/splash/splash_screen.dart';
 import 'package:fair_share/services/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +20,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const SplashScreen()),
+          home: user != null ? const HomeScreen() : const SplashScreen()),
     );
   }
 }

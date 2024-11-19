@@ -9,3 +9,4 @@ const Color blueButtonColor = Color(0xFF2563eb);
 
 const Color greyColor = Colors.grey;
 const Color greyColorforButton = Color(0xFF272832);
+const Color grey373a3f = Color(0xFF373a3f);
