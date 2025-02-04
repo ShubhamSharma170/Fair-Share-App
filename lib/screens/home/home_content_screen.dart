@@ -1,6 +1,8 @@
 import 'package:fair_share/constants/colors.dart';
 import 'package:fair_share/constants/contant_value.dart';
-import 'package:fair_share/screens/create%20group/create_group_screen.dart';
+// import 'package:fair_share/screens/create%20group/create_group_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +19,13 @@ class HomeContentScreen extends StatelessWidget {
           backgroundColor: splashbackgroundColor,
           actions: [
             IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => const CreateGroupScreen(),
-                    ));
+              onPressed: () async {
+                // Navigator.push(
+                //     context,
+                //     CupertinoPageRoute(
+                //       builder: (context) => const CreateGroupScreen(),
+                //     ));
+                await FirebaseAuth.instance.signOut();
               },
               icon: Icon(Icons.group_add_outlined, color: whiteColor),
             )

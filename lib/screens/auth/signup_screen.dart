@@ -226,47 +226,54 @@ class _SignupScreenState extends State<SignupScreen> {
                   SizedBox(height: height * .07),
                   Align(
                     alignment: Alignment.center,
-                    child: authProvider.isLoading
-                        ? CircularProgressIndicator(
-                            color: blueButtonColor,
-                          )
-                        : CupertinoButton(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: width * .15,
-                                vertical: height * .02),
-                            color: blueButtonColor,
-                            child: const Text("Register",
-                                style: TextStyle(
-                                  color: whiteColor,
-                                  fontSize: 20,
-                                )),
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                try {
-                                  await authProvider.signUp(
-                                    emailController.text,
-                                    passwordController.text,
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text('Sign-Up Successful!')),
-                                  );
-                                  userNameController.clear();
-                                  emailController.clear();
-                                  passwordController.clear();
-                                } on FirebaseAuthException catch (e) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(e.code.toString())),
-                                  );
-                                } catch (e) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(
-                                            "An Unexpected Error Occurred $e")),
-                                  );
-                                }
+                    child: SizedBox(
+                      width: width * .5,
+                      height: height * .07,
+                      child: CupertinoButton(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * .15, vertical: height * .02),
+                          color: blueButtonColor,
+                          child: authProvider.isLoading
+                              ? SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    color: whiteColor,
+                                  ),
+                                )
+                              : const Text("Register",
+                                  style: TextStyle(
+                                    color: whiteColor,
+                                    fontSize: 20,
+                                  )),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              try {
+                                await authProvider.signUp(
+                                  emailController.text,
+                                  passwordController.text,
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text('Sign-Up Successful!')),
+                                );
+                                userNameController.clear();
+                                emailController.clear();
+                                passwordController.clear();
+                              } on FirebaseAuthException catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(e.code.toString())),
+                                );
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          "An Unexpected Error Occurred $e")),
+                                );
                               }
-                            }),
+                            }
+                          }),
+                    ),
                   )
                 ],
               ),

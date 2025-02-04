@@ -1,6 +1,7 @@
 import 'package:fair_share/constants/colors.dart';
 import 'package:fair_share/constants/contant_value.dart';
-import 'package:fair_share/screens/auth/login_screen.dart';
+import 'package:fair_share/utils/routes/routes_name.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
@@ -46,10 +48,11 @@ class _SplashScreenState extends State<SplashScreen> {
                         color: whiteColor,
                       )),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) => const LoginScreen()));
+                    user != null
+                        ? Navigator.pushNamedAndRemoveUntil(
+                            context, RoutesName.home, (_) => false)
+                        : Navigator.pushNamedAndRemoveUntil(
+                            context, RoutesName.login, (_) => false);
                   })
             ],
           ))
